@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { dataSourceOptions } from './config/database/data-source';
 import { CacheModule } from '@nestjs/cache-manager';
@@ -19,13 +18,11 @@ dotenv.config();
     CacheModule.register({
       isGlobal: true,
       store: redisStore,
-      host: 'redis',
+      host: 'localhost',
       port: 6379,
     }),
     UsersModule,
     AuthModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

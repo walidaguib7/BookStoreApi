@@ -2,13 +2,13 @@ import { DataSource, DataSourceOptions } from 'typeorm';
 import * as dotenv from 'dotenv';
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
-  database: process.env.POSTGRES_DB,
+  database: 'bookstore',
   entities: ['dist/**/*.entity.js'],
   migrations: ['dist/config/database/migrations/*.js'],
   username: 'postgres',
-  host: 'database',
+  host: 'localhost',
   port: 5432,
-  password: 'postgres',
+  password: 'walidaguib',
   synchronize: true,
 };
 

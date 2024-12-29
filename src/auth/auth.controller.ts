@@ -20,7 +20,7 @@ export class AuthController {
 
   @ApiBadRequestResponse()
   @ApiCreatedResponse()
-  @Post()
+  @Post('SignUp')
   async SignUp(@Body() dto: CreateUserDto) {
     await this.usersService.CreateUser(dto);
   }

@@ -21,6 +21,8 @@ export class CreateUserDto {
   @IsNotEmpty()
   @ApiProperty()
   password: string;
+  @ApiProperty({ nullable: true })
+  mediaId: number;
   @IsArray()
   @ApiProperty()
   role: string[];

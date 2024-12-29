@@ -5,11 +5,21 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users.entity';
 import { AuthModule } from 'src/auth/auth.module';
 import { JwtService } from '@nestjs/jwt';
+import { MediaModule } from 'src/media/media.module';
+import { MediaService } from 'src/media/media.service';
+import { Media } from 'src/media/media.entity';
+import { CacheModule } from 'src/config/cache/cache.module';
+import { CachingService } from 'src/config/cache/cache.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User]), forwardRef(() => AuthModule)],
+  imports: [
+    TypeOrmModule.forFeature([User, Media]),
+    forwardRef(() => AuthModule),
+    MediaModule,
+    CacheModule,
+  ],
   controllers: [UsersController],
-  providers: [UsersService, JwtService],
+  providers: [UsersService, JwtService, CachingService],
   exports: [UsersService],
 })
 export class UsersModule {}

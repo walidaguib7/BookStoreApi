@@ -11,6 +11,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MediaModule } from './media/media.module';
 import { MailModule } from './config/mail/mail.module';
 import { MailerModule } from '@nestjs-modules/mailer';
+import { AuthorsModule } from './authors/authors.module';
 
 dotenv.config();
 
@@ -41,6 +42,7 @@ dotenv.config();
     UsersModule,
     AuthModule,
     MediaModule,
+    AuthorsModule,
   ],
 })
 export class AppModule {}

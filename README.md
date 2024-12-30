@@ -49,13 +49,13 @@ The Book Store API is a robust, scalable, and feature-rich backend service for m
 
 ## Features
 
-1. Authentication & Authorization
+Authentication & Authorization
 
 JWT Authentication: Secures endpoints with token-based authentication.
 Role-Based Authorization: Restricts access based on user roles (Admin, User).
 OAuth2 Integration: Provides optional login via Google and other providers.
 
-2. Book Management (CRUD)
+Book Management (CRUD)
 
 Create, Read, Update, Delete (CRUD) operations for:
 Books: Manage details like title, author, description, price, and stock.
@@ -63,7 +63,7 @@ Authors: Add and manage author profiles with pagination support.
 Categories: Organize books into categories with a many-to-many relationship.
 Search & Filter: Query books by title, category, or author.
 
-3. Real-Time Features
+Real-Time Features
 
 WebSockets Integration: Enables real-time notifications for:
 New book releases.
@@ -72,25 +72,17 @@ Admin-to-user announcements. 4. Caching
 Redis Integration: Boosts performance by caching frequently accessed data (e.g., book listings, categories).
 Efficient Invalidation: Ensures cache updates when data changes.
 
-4. Database Design
-
-Relational Database: Fully normalized schema using PostgreSQL.
-Entity Relationships:
-Books ↔ Categories: Many-to-Many.
-Books ↔ Authors: One-to-Many.
-
-5. Error Handling
+Error Handling
 
 Centralized error handling with custom exception filters.
 Detailed error responses in line with RESTful standards.
-
 End-to-end request tracking and API performance monitoring.
 
-6. Pagination & Sorting
+Pagination & Sorting
 
 Built-in support for paginated and sorted results for large datasets (e.g., authors, books).
 
-7. API Documentation
+API Documentation
 
 Swagger/OpenAPI: Interactive API documentation with detailed endpoint descriptions and example payloads.
 

@@ -41,59 +41,45 @@ $ npm run start
 # watch mode
 $ npm run start:dev
 
-# production mode
-$ npm run start:prod
+
+
+## Project Overview
+
+Project Overview: Book Store API
+The Book Store API is a robust, scalable, and feature-rich backend service for managing books, authors, categories, and user interactions. It’s built with ASP.NET Core and Entity Framework Core, demonstrating best practices in modern web development.
+
+Features
+1. Authentication & Authorization
+JWT Authentication: Secures endpoints with token-based authentication.
+Role Based Authorization: Restricts access based on user roles (Admin, User).
+OAuth2 Integration: Provides optional login via Google and other providers.
+2. Book Management (CRUD)
+Create, Read, Update, Delete (CRUD) operations for:
+Books: Manage details like title, author, description, price, and stock.
+Authors: Add and manage author profiles with pagination support.
+Categories: Organize books into categories with a many-to-many relationship.
+Search & Filter: Query books by title, category, or author.
+3. Real-Time Features
+WebSockets Integration: Enables real-time notifications for:
+New book releases.
+Stock updates or out-of-stock alerts.
+Admin-to-user announcements.
+4. Caching
+Redis Integration: Boosts performance by caching frequently accessed data (e.g., book listings, categories).
+Efficient Invalidation: Ensures cache updates when data changes.
+5. Database Design
+Relational Database: Fully normalized schema using PostgreSQL.
+6. State Management
+Advanced State Tracking:
+Order and payment states with state machines.
+Stripe webhook integration for payment status updates.
+7. Error Handling
+Centralized error handling with custom exception filters.
+Detailed error responses in line with RESTful standards.
+8. Logging & Monitoring Integrated logging.
+End-to-end request tracking and API performance monitoring.
+9. Pagination & Sorting
+Built-in support for paginated and sorted results for large datasets (e.g., authors, books).
+Swagger/OpenAPI: Interactive API documentation with detailed endpoint descriptions and example payloads.
+
 ```
-
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).

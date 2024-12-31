@@ -14,6 +14,10 @@ import { createBookDto } from './dtos/create.dto';
 import { Category } from 'src/category/category.entity';
 import { updateBookDto } from './dtos/update.dto';
 import { Authors } from 'src/authors/authors.entity';
+import { MediaService } from 'src/media/media.service';
+import { PublishersService } from 'src/publishers/publishers.service';
+import { Publisher } from 'src/publishers/publishers.entity';
+import { Media } from 'src/media/media.entity';
 
 @Injectable()
 export class BooksService {
@@ -23,6 +27,10 @@ export class BooksService {
     private readonly categoryRepository: Repository<Category>,
     @InjectRepository(Authors)
     private readonly authorsRepository: Repository<Authors>,
+    @InjectRepository(Media)
+    private readonly mediaRepository: Repository<Media>,
+    @InjectRepository(Publisher)
+    private readonly publisherRepository: Repository<Publisher>,
     private readonly cachingService: CachingService,
   ) {}
 
@@ -65,8 +73,19 @@ export class BooksService {
 
   async createBook(dto: createBookDto) {
     const author = await this.authorsRepository.findOneBy({ id: dto.authorId });
+    if (!author) throw new NotFoundException('Author not found');
+
     const categories = await this.categoryRepository.find({
       where: { name: In(dto.categories) },
+    });
+    if (categories.length === 0)
+      throw new NotFoundException('Categories not found');
+
+    const media = await this.mediaRepository.findOne({
+      where: { id: dto.mediaId },
+    });
+    const publisher = await this.publisherRepository.findOne({
+      where: { id: dto.publisherId },
     });
 
     const book = this.BookRepositoy.create({
@@ -75,11 +94,16 @@ export class BooksService {
       price: dto.price,
       published_date: dto.published_date,
       quantity_in_stock: dto.quantity_in_stock,
-      author: author,
-      categories: categories.length > 0 ? categories : [],
+      media,
+      publisher,
+      author,
+      categories,
     });
 
+    // Save the book entity
     await this.BookRepositoy.save(book);
+
+    // Clear related cache keys
     await this.cachingService.removeByPattern('books');
     await this.cachingService.removeByPattern('book');
   }
@@ -93,6 +117,14 @@ export class BooksService {
       throw new NotFoundException('categories must have at least one item');
     }
 
+    const media = await this.mediaRepository.findOne({
+      where: { id: dto.mediaId },
+    });
+    const publisher = await this.publisherRepository.findOne({
+      where: { id: dto.publisherId },
+    });
+    if (!publisher) throw new NotFoundException('publisher not found');
+
     const book = await this.BookRepositoy.findOne({
       where: { id: id },
     });
@@ -102,6 +134,8 @@ export class BooksService {
     book.price = dto.price;
     book.published_date = dto.published_date;
     book.quantity_in_stock = dto.quantity_in_stock;
+    book.media = media;
+    book.publisher = publisher;
 
     const author = await this.authorsRepository.findOneBy({ id: dto.authorId });
     if (author == null) throw new NotFoundException('author not found');

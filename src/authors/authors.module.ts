@@ -8,9 +8,10 @@ import { CacheModule } from 'src/config/cache/cache.module';
 import { JwtService } from '@nestjs/jwt';
 import { CachingService } from 'src/config/cache/cache.service';
 import { User } from 'src/users/users.entity';
+import { Book } from 'src/books/book.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Authors]), AuthModule, CacheModule],
+  imports: [TypeOrmModule.forFeature([Authors, Book]), AuthModule, CacheModule],
   controllers: [AuthorsController],
   providers: [AuthorsService, JwtService, CachingService],
 })

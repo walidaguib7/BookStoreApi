@@ -8,11 +8,13 @@ import {
   Patch,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { BooksPaginationDto } from './dtos/pagination.dto';
 import { createBookDto } from './dtos/create.dto';
 import { updateBookDto } from './dtos/update.dto';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('books')
 export class BooksController {
@@ -23,16 +25,19 @@ export class BooksController {
     return await this.booksService.fetchAll(query);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   async getBook(@Param('id', ParseIntPipe) id: number) {
     return await this.booksService.getBook(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   async createBook(@Body() dto: createBookDto) {
     await this.booksService.createBook(dto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   async updateBook(
     @Param('id', ParseIntPipe) id: number,
@@ -41,6 +46,7 @@ export class BooksController {
     await this.booksService.updateBook(id, dto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async deleteBook(@Param('id', ParseIntPipe) id: number) {
     await this.booksService.deleteOne(id);

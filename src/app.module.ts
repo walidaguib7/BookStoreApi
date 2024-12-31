@@ -14,6 +14,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { AuthorsModule } from './authors/authors.module';
 import { BooksModule } from './books/books.module';
 import { CategoryModule } from './category/category.module';
+import { PublishersModule } from './publishers/publishers.module';
 
 dotenv.config();
 
@@ -47,6 +48,7 @@ dotenv.config();
     AuthorsModule,
     BooksModule,
     CategoryModule,
+    PublishersModule,
   ],
 })
 export class AppModule {}

@@ -10,10 +10,11 @@ import { MediaService } from 'src/media/media.service';
 import { Media } from 'src/media/media.entity';
 import { CacheModule } from 'src/config/cache/cache.module';
 import { CachingService } from 'src/config/cache/cache.service';
+import { Review } from 'src/reviews/review.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User, Media]),
+    TypeOrmModule.forFeature([User, Media, Review]),
     forwardRef(() => AuthModule),
     MediaModule,
     CacheModule,

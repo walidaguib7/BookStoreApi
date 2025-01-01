@@ -17,10 +17,18 @@ import { Publisher } from 'src/publishers/publishers.entity';
 import { Media } from 'src/media/media.entity';
 import { MediaService } from 'src/media/media.service';
 import { PublishersService } from 'src/publishers/publishers.service';
+import { Review } from 'src/reviews/review.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Book, Authors, Category, Publisher, Media]),
+    TypeOrmModule.forFeature([
+      Book,
+      Authors,
+      Category,
+      Publisher,
+      Media,
+      Review,
+    ]),
     AuthorsModule,
     AuthModule,
     CacheModule,

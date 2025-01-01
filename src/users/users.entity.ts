@@ -1,8 +1,10 @@
 import { Media } from 'src/media/media.entity';
+import { Review } from 'src/reviews/review.entity';
 import {
   Column,
   Entity,
   JoinColumn,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -31,4 +33,6 @@ export class User {
   })
   @JoinColumn()
   file: Media;
+  @OneToMany(() => Review, (review) => review.user, { onDelete: 'CASCADE' })
+  reviews: Review[];
 }

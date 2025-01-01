@@ -2,6 +2,7 @@ import { Authors } from 'src/authors/authors.entity';
 import { Category } from 'src/category/category.entity';
 import { Media } from 'src/media/media.entity';
 import { Publisher } from 'src/publishers/publishers.entity';
+import { Review } from 'src/reviews/review.entity';
 import {
   Column,
   Entity,
@@ -9,6 +10,7 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -37,4 +39,6 @@ export class Book {
   @ManyToMany(() => Category, (category) => category.books)
   @JoinTable({ name: 'Book_categories' })
   categories: Category[];
+  @OneToMany(() => Review, (review) => review.book)
+  reviews: Review[];
 }

@@ -16,6 +16,7 @@ import { BooksModule } from './books/books.module';
 import { CategoryModule } from './category/category.module';
 import { PublishersModule } from './publishers/publishers.module';
 import { ReviewsModule } from './reviews/reviews.module';
+import { WishlistsModule } from './wishlists/wishlists.module';
 
 dotenv.config();
 
@@ -51,6 +52,7 @@ dotenv.config();
     CategoryModule,
     PublishersModule,
     ReviewsModule,
+    WishlistsModule,
   ],
 })
 export class AppModule {}

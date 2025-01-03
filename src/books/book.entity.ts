@@ -3,6 +3,7 @@ import { Category } from 'src/category/category.entity';
 import { Media } from 'src/media/media.entity';
 import { Publisher } from 'src/publishers/publishers.entity';
 import { Review } from 'src/reviews/review.entity';
+import { WishLists } from 'src/wishlists/wishlists.entity';
 import {
   Column,
   Entity,
@@ -41,4 +42,6 @@ export class Book {
   categories: Category[];
   @OneToMany(() => Review, (review) => review.book)
   reviews: Review[];
+  @OneToMany(() => WishLists, (ws) => ws.book)
+  wishlists: WishLists[];
 }

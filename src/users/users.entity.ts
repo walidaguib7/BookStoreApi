@@ -1,5 +1,6 @@
 import { Media } from 'src/media/media.entity';
 import { Review } from 'src/reviews/review.entity';
+import { WishLists } from 'src/wishlists/wishlists.entity';
 import {
   Column,
   Entity,
@@ -35,4 +36,7 @@ export class User {
   file: Media;
   @OneToMany(() => Review, (review) => review.user, { onDelete: 'CASCADE' })
   reviews: Review[];
+
+  @OneToMany(() => WishLists, (ws) => ws.user)
+  wishlists: WishLists[];
 }

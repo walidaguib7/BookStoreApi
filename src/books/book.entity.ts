@@ -1,5 +1,6 @@
 import { Authors } from 'src/authors/authors.entity';
 import { Category } from 'src/category/category.entity';
+import { Discount } from 'src/discounts/discounts.entity';
 import { Media } from 'src/media/media.entity';
 import { Publisher } from 'src/publishers/publishers.entity';
 import { Review } from 'src/reviews/review.entity';
@@ -44,4 +45,6 @@ export class Book {
   reviews: Review[];
   @OneToMany(() => WishLists, (ws) => ws.book)
   wishlists: WishLists[];
+  @ManyToMany(() => Discount)
+  discounts: Discount[];
 }

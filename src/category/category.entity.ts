@@ -1,4 +1,5 @@
 import { Book } from 'src/books/book.entity';
+import { Discount } from 'src/discounts/discounts.entity';
 import {
   Column,
   Entity,
@@ -17,4 +18,6 @@ export class Category {
   description: string;
   @ManyToMany(() => Book, (book) => book.categories)
   books: Book[];
+  @ManyToMany(() => Discount)
+  discounts: Discount[];
 }

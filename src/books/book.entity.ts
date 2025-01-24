@@ -2,6 +2,7 @@ import { Authors } from 'src/authors/authors.entity';
 import { Category } from 'src/category/category.entity';
 import { Discount } from 'src/discounts/discounts.entity';
 import { Media } from 'src/media/media.entity';
+import { Order } from 'src/orders/orders.entity';
 import { Publisher } from 'src/publishers/publishers.entity';
 import { Review } from 'src/reviews/review.entity';
 import { WishLists } from 'src/wishlists/wishlists.entity';
@@ -47,4 +48,6 @@ export class Book {
   wishlists: WishLists[];
   @ManyToMany(() => Discount)
   discounts: Discount[];
+  @ManyToMany(() => Order, (order) => order.books)
+  orders: Order[];
 }

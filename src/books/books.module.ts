@@ -18,6 +18,7 @@ import { Media } from 'src/media/media.entity';
 import { MediaService } from 'src/media/media.service';
 import { PublishersService } from 'src/publishers/publishers.service';
 import { Review } from 'src/reviews/review.entity';
+import { Order } from 'src/orders/orders.entity';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { Review } from 'src/reviews/review.entity';
       Publisher,
       Media,
       Review,
+      Order,
     ]),
     AuthorsModule,
     AuthModule,

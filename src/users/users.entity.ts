@@ -1,4 +1,5 @@
 import { Media } from 'src/media/media.entity';
+import { Payments } from 'src/payments/payments.entity';
 import { Review } from 'src/reviews/review.entity';
 import { WishLists } from 'src/wishlists/wishlists.entity';
 import {
@@ -39,4 +40,6 @@ export class User {
 
   @OneToMany(() => WishLists, (ws) => ws.user)
   wishlists: WishLists[];
+  @OneToMany(() => Payments, (payment) => payment.user)
+  payments: Payments[];
 }

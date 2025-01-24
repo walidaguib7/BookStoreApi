@@ -18,6 +18,10 @@ import { PublishersModule } from './publishers/publishers.module';
 import { ReviewsModule } from './reviews/reviews.module';
 import { WishlistsModule } from './wishlists/wishlists.module';
 import { DiscountsModule } from './discounts/discounts.module';
+import { OrdersModule } from './orders/orders.module';
+import { PaymentsModule } from './payments/payments.module';
+
+import { StripeModule } from './stripe/stripe.module';
 
 dotenv.config();
 
@@ -25,6 +29,7 @@ dotenv.config();
   imports: [
     ConfigModule.forRoot({ envFilePath: '.env', isGlobal: true }),
     TypeOrmModule.forRoot(dataSourceOptions),
+    StripeModule.forRootAsync(),
     MailerModule.forRoot({
       transport: {
         host: process.env.MAIL_HOST,
@@ -55,6 +60,8 @@ dotenv.config();
     ReviewsModule,
     WishlistsModule,
     DiscountsModule,
+    OrdersModule,
+    PaymentsModule,
   ],
 })
 export class AppModule {}

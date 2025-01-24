@@ -23,9 +23,9 @@ export class Discount {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_At: Date;
   @ManyToMany(() => Book)
-  @JoinTable()
+  @JoinTable({ name: 'book_discounts' })
   books: Book[];
   @ManyToMany(() => Category)
-  @JoinTable()
+  @JoinTable({ name: 'category_discounts' })
   categories: Category[];
 }

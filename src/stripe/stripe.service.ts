@@ -1,12 +1,20 @@
-import { Inject, Injectable, Req, Res } from '@nestjs/common';
+import { forwardRef, Inject, Injectable, Req, Res } from '@nestjs/common';
 import Stripe from 'stripe';
 import { Response, Request } from 'express';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Payments } from 'src/payments/payments.entity';
+import { Repository } from 'typeorm';
+import { paymentStatus } from 'src/utils/enums';
+import { PaymentsService } from 'src/payments/payments.service';
 
 @Injectable()
 export class StripeService {
   private stripe: Stripe;
 
-  constructor() {
+  constructor(
+    @Inject(forwardRef(() => PaymentsService))
+    private readonly paymentsService: PaymentsService,
+  ) {
     this.stripe = new Stripe(process.env.STRIPE_KEY, {});
   }
 
@@ -23,10 +31,18 @@ export class StripeService {
       // Handle specific event types
       switch (event.type) {
         case 'payment_intent.succeeded':
+          await this.paymentsService.updatePaymentStatus(
+            event.data.object.id,
+            paymentStatus.PAID,
+          );
           console.log('💰 PaymentIntent was successful!', event.data.object);
           break;
 
         case 'payment_intent.payment_failed':
+          await this.paymentsService.updatePaymentStatus(
+            event.data.object.id,
+            paymentStatus.FAILED,
+          );
           console.log('❌ PaymentIntent failed', event.data.object);
           break;
 
@@ -39,5 +55,13 @@ export class StripeService {
       console.error(`⚠️ Webhook signature verification failed.`, err.message);
       res.status(400).send('Webhook Error');
     }
+  }
+
+  async createPaymentIntent(amount: number, currency: string) {
+    return await this.stripe.paymentIntents.create({
+      amount,
+      currency,
+      payment_method_types: ['card'],
+    });
   }
 }

@@ -8,6 +8,8 @@ export class Payments {
   @PrimaryGeneratedColumn()
   id: number;
   @Column()
+  payment_Intent_Id: string;
+  @Column()
   payment_method: string;
   @Column()
   payment_status: paymentStatus;

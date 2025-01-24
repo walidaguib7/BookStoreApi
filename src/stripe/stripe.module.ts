@@ -1,7 +1,8 @@
-import { DynamicModule, Module } from '@nestjs/common';
+import { DynamicModule, forwardRef, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { StripeController } from './stripe.controller';
 import { StripeService } from './stripe.service';
+import { PaymentsModule } from 'src/payments/payments.module';
 
 @Module({})
 export class StripeModule {
@@ -9,9 +10,10 @@ export class StripeModule {
     return {
       module: StripeModule,
       controllers: [StripeController],
-      imports: [ConfigModule.forRoot()],
+      imports: [ConfigModule.forRoot(), PaymentsModule],
       providers: [
         StripeService,
+
         {
           provide: 'STRIPE_KEY',
           useFactory: async (configService: ConfigService) =>
